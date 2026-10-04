@@ -1,0 +1,84 @@
+# ==============================================================================
+# VECTIO - REGRAS DE SEGURANÇA E PERFORMANCE (HOSTINGER / LITESPEED / APACHE)
+# ==============================================================================
+
+# 1. ATIVAR MOTOR DE REESCRITA
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Forçar HTTPS seguro em todas as requisições
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Prevenir quebra de rotas SPA (Single Page Application)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.html [L]
+</IfModule>
+
+# 2. DESATIVAR LISTAGEM DE DIRETÓRIOS (ANTI-RECONNAISSANCE)
+Options -Indexes
+
+# 3. BLOQUEIO DE ARQUIVOS SENSÍVEIS E DE AMBIENTE
+<FilesMatch "^\.|\.(env|json|lock|md|bak|config|ts|tsx|map|log|sql|exe)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Bloquear especificamente tentativas de acesso a pastas de versionamento (.git)
+RedirectMatch 404 /\.git
+
+# 4. CABEÇALHOS HTTP DE SEGURANÇA DEFENSIVA
+<IfModule mod_headers.c>
+    # Previne ataques de Clickjacking (o site não pode ser encapsulado em iframes maliciosos)
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Previne ataques de MIME-Sniffing no navegador
+    Header set X-Content-Type-Options "nosniff"
+
+    # Ativa proteção XSS nos navegadores legados
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Enforça HTTPS estrito via HSTS (1 ano, inclui subdomínios)
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+
+    # Protege a transmissão de dados de referência entre origens
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Restringe APIs invasivas de hardware e permissões
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+
+    # Content-Security-Policy (CSP) - Blindagem contra XSS e injeção de scripts não autorizados
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' data:; connect-src 'self' https://wa.me; frame-ancestors 'self';"
+</IfModule>
+
+# 5. COMPRESSÃO DE DADOS (GZIP / DEFLATE PARA LITESPEED / APACHE)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# 6. CACHE INTELIGENTE DE RECURSOS ESTÁTICOS
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    # HTML nunca deve ficar preso em cache longo (para atualizações imediatas)
+    ExpiresByType text/html "access plus 0 seconds"
+
+    # CSS e JavaScript versionados (com hash do Vite)
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+
+    # Mídias e Fontes
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>

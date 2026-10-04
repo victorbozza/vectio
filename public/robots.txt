@@ -1,0 +1,11 @@
+# robots.txt for https://vectio.com.br
+# Technical SEO & Local Search Directives
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Host & Sitemaps
+Host: https://vectio.com.br
+Sitemap: https://vectio.com.br/sitemap.xml

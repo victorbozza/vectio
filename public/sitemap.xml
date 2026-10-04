@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Página Inicial / Landing Page Principal de Marília e Região -->
+  <url>
+    <loc>https://vectio.com.br/</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://vectio.com.br/images/hero-dashboard.jpg</image:loc>
+      <image:title>Vectio — Agência de E-commerce e Posicionamento Digital em Marília e Região</image:title>
+      <image:caption>Estruturação de lojas virtuais e canais diretos de vendas para empresas de Marília, Garça, Vera Cruz e Pompeia</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Âncora: Oportunidade e Comparativo de Vendas -->
+  <url>
+    <loc>https://vectio.com.br/#oportunidade</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Âncora: Linha do Tempo de Implementação da Agência -->
+  <url>
+    <loc>https://vectio.com.br/#agencia</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Âncora: Simulador de Receita para Negócios Locais -->
+  <url>
+    <loc>https://vectio.com.br/#simulador</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Âncora: Planos de Contratação (Comércio Direto & Presença Direta) -->
+  <url>
+    <loc>https://vectio.com.br/#solucoes</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Âncora: Metodologia Operacional de Posicionamento -->
+  <url>
+    <loc>https://vectio.com.br/#metodologia</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Âncora: Diagnóstico e Contato Comercial Local (DDD 14) -->
+  <url>
+    <loc>https://vectio.com.br/#contato</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>
